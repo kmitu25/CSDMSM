@@ -1,7 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # A 1D Diffusion Model
+A 1D Diffusion Model
 
 # Here we develop a one-dimensional model of diffusion.
 # It assumes a constant diffusivity
@@ -19,7 +16,7 @@
 
 # $$ C^{t+1}_x = C^t_x + {D \Delta t \over \Delta x^2} (C^t_{x+1} - 2C^t_x + C^t_{x-1}) $$
 
-# This is the FTCS scheme as described by Slingerland and kump (2011)
+# This is the FTCS scheme as described by Slingerland and Kump (2011)
 
 # We will use two libraries, Numpy (for arrays) and matplotlib (for plotting), that are not part of the core Python distribution.
 
@@ -97,20 +94,8 @@ x
 
 # Python is inclusive on the left side but exclusive on the right side, so if I want to get the first 5, I need to use o:5
 
-# In[11]:
-
-
-#x[0:5]
-
-
-# In[12]:
-
-
-#x[-5:]
-
-
-# Now back to model. Set the initial conditions for the model.
-# The cake 'C' is a step function with a high value of the left, a low value on the right, and a step at the center of the domain.
+# Now back to the model. Set the initial conditions for the model.
+# The cake 'C' is a step function with a high value on the left, a low value on the right, and a step at the center of the domain.
 
 # In[13]:
 
@@ -156,8 +141,8 @@ dt=0.5*dx**2/D
 dt
 
 
-# Loop over the time steps of the model. solving the difusion equation using the FTC scheme shown above
-# Note the use of array operations on the variables 'C'. the boundary conditions remain fixed in each time step
+# Loop over the time steps of the model. Solving the diffusion equation using the FTC scheme shown above
+# Note the use of array operations on the variable 'C'. The boundary conditions remain fixed in each time step
 
 # In[18]:
 
@@ -166,48 +151,14 @@ for t in range(0, nt):
 	C[1:-1] += D * dt / dx ** 2 * (C[:-2] - 2*C[1:-1] + C[2:])
 
 
-# In[19]:
-
-
-#z=list(range(5))
-
-
-# In[20]:
-
-
-#z
-
-
-# In[21]:
-
-
-#z[1:-1]
-
-
-# In[22]:
-
-
-#z[:-2]
-
-
-# In[23]:
-
-
-#z[2:]
-
 
 # plot the result
-
-# In[24]:
-
 
 plt.plot(x, C, "b")
 plt.xlabel("x")
 plt.ylabel("C")
 plt.title("Final Profile")
 
-
-# In[ ]:
 
 
 
